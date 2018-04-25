@@ -8,12 +8,17 @@ class App extends Component {
   }
 
   render() {
+    const { authedUser } = this.props;
     return (
       <div>
-        My App
+        {authedUser === null && <p>My App</p>}
       </div>
     );
   }
 }
 
-export default connect()(App);
+const mapStateToProps = ({ authedUser }) => ({
+  authedUser,
+})
+
+export default connect(mapStateToProps)(App);
