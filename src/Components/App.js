@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
+import Login from './Login';
 
 class App extends Component {
   componentDidMount() {
@@ -11,7 +12,7 @@ class App extends Component {
     const { authedUser } = this.props;
     return (
       <div>
-        {authedUser === null && <p>My App</p>}
+        {authedUser === null && <Login />}
       </div>
     );
   }
