@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import setAuthedUser from '../actions/authedUser';
+import { setAuthedUser } from '../actions/authedUser';
 import { connect } from 'react-redux';
 
 class Login extends Component {
   state = {
-    selectedUser: null
+    selectedUser: ''
   }
 
   handleChange = (e) => {
@@ -13,20 +13,31 @@ class Login extends Component {
     this.setState({
       selectedUser: id,
     });
-    console.log(id);
+  }
+
+  handleLogin = () => {
+    const { dispatch } = this.props;
+
+    dispatch(setAuthedUser(this.state.selectedUser));
+
+    {/* TODO: Redirect to HomePage*/}
   }
 
   render() {
     const { users } = this.props;
 
     return (
-      <select onChange={this.handleChange}>
-        {
-          users.map((user) => (
-            <option key={user.id} value={user.id}>{user.name}</option>
-          ))
-        }
-      </select>
+      <div>
+        <select onChange={this.handleChange} value={this.state.value}>
+          <option key='' value=''>--</option>
+          {
+            users.map((user) => (
+              <option key={user.id} value={user.id}>{user.name}</option>
+            ))
+          }
+        </select>
+        <button onClick={this.handleLogin}>Log In</button>
+      </div>
     )
   }
 }

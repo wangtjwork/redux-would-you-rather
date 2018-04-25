@@ -12,7 +12,10 @@ class App extends Component {
     const { authedUser } = this.props;
     return (
       <div>
-        {authedUser === null && <Login />}
+        {authedUser === null
+          && <Login />
+           
+        }
       </div>
     );
   }
