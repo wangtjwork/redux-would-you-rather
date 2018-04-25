@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import Login from './Login';
+import Dashboard from './Dashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -13,8 +14,8 @@ class App extends Component {
     return (
       <div>
         {authedUser === null
-          && <Login />
-           
+          ? <Login />
+          : <Dashboard />
         }
       </div>
     );
