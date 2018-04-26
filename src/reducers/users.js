@@ -1,4 +1,5 @@
-import { RECEIVE_USERS, MAKE_VOTE } from '../actions/users';
+import { RECEIVE_USERS } from '../actions/users';
+import { MAKE_VOTE, CANCEL_VOTE } from '../actions/shared';
 
 export default function users (state = {}, action) {
   switch(action.type) {
@@ -7,7 +8,7 @@ export default function users (state = {}, action) {
         ...state,
         ...action.users
       };
-    case MAKE_VOTE:
+    case MAKE_VOTE: {
       const { userID, questionID, option } = action;
       return {
         ...state,
@@ -19,6 +20,18 @@ export default function users (state = {}, action) {
           }
         }
       }
+    }
+
+    case CANCEL_VOTE: {
+      const { userID, questionID, option } = action;
+      return {
+        ...state,
+        [userID]: {
+          ...state[userID],
+          answers: state[userID].answers.filter((answer) => answer.id !== questionID)
+        }
+      }
+    }
     default:
      return state;
   }
