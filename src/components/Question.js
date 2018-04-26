@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { receiveVote } from '../actions/questions';
-import { makeVote } from '../actions/users';
+import { handleSaveAnswer } from '../actions/shared';
 
 
 class Question extends Component {
@@ -12,8 +11,7 @@ class Question extends Component {
       questionID: question.id,
       option
     };
-    dispatch(makeVote(vote));
-    dispatch(receiveVote(vote));
+    dispatch(handleSaveAnswer(vote));
   }
 
   render() {

@@ -15,7 +15,7 @@ export default function users (state = {}, action) {
           ...state[userID],
           answers: {
             ...state[userID]['answers'],
-            questionID: option
+            [questionID]: option
           }
         }
       }

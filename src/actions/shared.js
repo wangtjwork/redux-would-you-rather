@@ -1,6 +1,6 @@
-import { getInitialData } from '../utils/API';
-import { receiveUsers } from './users';
-import { receiveQuestions } from './questions';
+import { getInitialData, saveQuestionAnswer } from '../utils/API';
+import { receiveUsers, makeVote } from './users';
+import { receiveQuestions, receiveVote } from './questions';
 import { setAuthedUser } from './authedUser';
 
 export function handleInitialData() {
@@ -11,5 +11,18 @@ export function handleInitialData() {
         dispatch(receiveQuestions(questions));
         dispatch(setAuthedUser('johndoe'));
       })
+  }
+}
+
+export function handleSaveAnswer(vote) {
+  return (dispatch) => {
+    return saveQuestionAnswer({
+      authedUser: vote.userID,
+      qid: vote.questionID,
+      answer: vote.option
+    }).then(() => {
+      dispatch(makeVote(vote));
+      dispatch(receiveVote(vote));
+    })
   }
 }
