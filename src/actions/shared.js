@@ -1,6 +1,6 @@
 import { getInitialData } from '../utils/API';
-import { receiveUsers, votedAQuestion } from './users';
-import { receiveQuestions, votedByUser } from './questions';
+import { receiveUsers } from './users';
+import { receiveQuestions, receiveVote } from './questions';
 import { setAuthedUser } from './authedUser';
 
 export function handleInitialData() {
@@ -15,6 +15,8 @@ export function handleInitialData() {
 }
 
 export function madeVote(vote) {
-  dispatch(votedByUser(vote));
-  dispatch(votedAQuestion(vote));
+  return (dispatch) => {
+    //dispatch(votedByUser(vote));
+    dispatch(receiveVote(vote));
+  }
 }

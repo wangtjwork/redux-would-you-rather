@@ -8,7 +8,7 @@ export function receiveQuestions(questions) {
   }
 }
 
-export function votedByUser({userID, questionID, voteForOne}) {
+export function receiveVote({userID, questionID, voteForOne}) {
   return {
     type: RECEIVE_VOTE,
     userID,

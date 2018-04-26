@@ -8,13 +8,15 @@ export default function questions(state = {}, action) {
         ...action.questions
       };
     case RECEIVE_VOTE:
+      const { userID, questionID, option } = action;
+
       return {
         ...state,
-        action.questionID: {
-          ...state[action.questionID],
+        [questionID]: {
+          ...state[questionID],
           [option]: {
-            ...state[action.questionID][option],
-            votes: curOption.votes.concat([userID])
+            ...state[questionID][option],
+            votes: state[questionID][option].votes.concat([userID])
           }
         }
       }
