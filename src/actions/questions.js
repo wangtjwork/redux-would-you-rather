@@ -8,11 +8,9 @@ export function receiveQuestions(questions) {
   }
 }
 
-export function receiveVote({userID, questionID, voteForOne}) {
+export function receiveVote(vote) {
   return {
+    ...vote,
     type: RECEIVE_VOTE,
-    userID,
-    questionID,
-    option: voteForOne ? 'optionOne' : 'optionTwo'
   }
 }
