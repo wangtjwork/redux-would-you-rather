@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Question extends Component {
+  handleVote = (voteForOne) => {
+    console.log(`Voting for ${voteForOne ? 'OptionOne' : 'OptionTwo'}`);
+  }
+
   render() {
     const { curUser, question } = this.props;
     const hasAnswered = curUser.answers.hasOwnProperty(question.id);
@@ -18,7 +22,7 @@ class Question extends Component {
         <div>
           <span>
             {hasAnswered === false
-              ? <button>{question.optionOne.text}</button>
+              ? <button onClick={() => this.handleVote(true)}>{question.optionOne.text}</button>
               : question.optionOne.text
             }
             {hasAnswered && (totalVotes === 0
@@ -29,7 +33,7 @@ class Question extends Component {
           <span> Or </span>
           <span>
             {hasAnswered === false
-              ? <button>{question.optionTwo.text}</button>
+              ? <button onClick={() => this.handleVote(false)}>{question.optionTwo.text}</button>
               : question.optionTwo.text
             }
             {hasAnswered && (totalVotes === 0
