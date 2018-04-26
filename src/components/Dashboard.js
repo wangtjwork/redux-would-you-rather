@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import QuestionList from './QuestionList';
 
 class Dashboard extends Component {
   state = {
@@ -21,9 +22,7 @@ class Dashboard extends Component {
         .filter(id => !answers.hasOwnProperty(id))
         .map(id => questions[id]);
 
-    showingQuestions.sort((a, b) => b.timestamp - a.timestamp)
-
-    console.log(showingQuestions);
+    showingQuestions.sort((a, b) => b.timestamp - a.timestamp);
 
     return (
       <div>
@@ -33,7 +32,8 @@ class Dashboard extends Component {
           <option value="true">Answered</option>
           <option value="false">Not Answered</option>
         </select>
-
+        <h4>{this.state.showAnswered ? 'Answered' : 'Not Answered'}</h4>
+        <QuestionList questions={showingQuestions}/>
       </div>
     )
   }
