@@ -5,6 +5,7 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 import Question from './Question';
 import AddQuestion from './AddQuestion';
+import LeaderBoard from './LeaderBoard';
 
 class App extends Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class App extends Component {
       <div>
         {authedUser === null
           ? <Login />
-          : <AddQuestion />
+          : <LeaderBoard />
         }
       </div>
     );
