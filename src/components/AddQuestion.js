@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleAddQuestion } from '../actions/shared'
 
 class AddQuestion extends Component {
   state = {
@@ -15,7 +16,16 @@ class AddQuestion extends Component {
   }
 
   handleSubmit = () => {
-    console.log(this.state.optionOneText);
+    const { optionOneText, optionTwoText } = this.state;
+    const { authedUser, dispatch } = this.props;
+
+    dispatch(handleAddQuestion({
+      optionOneText,
+      optionTwoText,
+      author: authedUser
+    }));
+
+    {/* TODO: Redirect to Dashboard*/}
   }
 
   render() {
