@@ -61,6 +61,7 @@ const percentCalculation = (num, total) => {
 }
 
 const mapStateToProps = ({ users, questions, authedUser }) => {
+  {/* TODO: Get ID from Router*/}
   return {
     curUser: users[authedUser],
     question: questions["8xf0y6ziyjabvozdd253nd"],

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import Login from './Login';
 import Dashboard from './Dashboard';
-import Question from './Question'
+import Question from './Question';
+import AddQuestion from './AddQuestion';
 
 class App extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class App extends Component {
       <div>
         {authedUser === null
           ? <Login />
-          : <Question />
+          : <AddQuestion />
         }
       </div>
     );

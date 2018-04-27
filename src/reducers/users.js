@@ -21,9 +21,8 @@ export default function users (state = {}, action) {
         }
       }
     }
-
     case CANCEL_VOTE: {
-      const { userID, questionID, option } = action;
+      const { userID, questionID } = action;
       return {
         ...state,
         [userID]: {
