@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class AddQuestion extends Component {
   state = {
@@ -7,14 +8,19 @@ class AddQuestion extends Component {
   }
 
   handleChangeText = (text, option) => {
-    console.log(text, option);
     this.setState((prevState) => ({
       ...prevState,
       [option]: text,
     }));
   }
 
+  handleSubmit = () => {
+    console.log(this.state.optionOneText);
+  }
+
   render() {
+    const {optionOneText, optionTwoText } = this.state;
+
     return (
       <div>
         <h2>Add Question</h2>
@@ -27,9 +33,16 @@ class AddQuestion extends Component {
           value={this.state.optionTwoText}
           onChange={(e) => this.handleChangeText(e.target.value, 'optionTwoText')}
         />
+        <button disabled={optionOneText.length === 0 || optionTwoText.length === 0}
+          onClick={this.handleSubmit}
+        >
+          Submit
+        </button>
       </div>
     )
   }
 }
 
-export default AddQuestion;
+const mapStateToProps = ({ authedUser }) => ({ authedUser })
+
+export default connect(mapStateToProps)(AddQuestion);
