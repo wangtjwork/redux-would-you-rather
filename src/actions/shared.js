@@ -1,10 +1,11 @@
-import { getInitialData, saveQuestionAnswer } from '../utils/API';
+import { getInitialData, saveQuestionAnswer, saveQuestion } from '../utils/API';
 import { receiveUsers } from './users';
 import { receiveQuestions } from './questions';
 import { setAuthedUser } from './authedUser';
 
 export const MAKE_VOTE = 'MAKE_VOTE';
 export const CANCEL_VOTE = 'CANCEL_VOTE';
+export const ADD_QUESTION = 'ADD_QUESTION';
 
 function makeVote (vote) {
   return {
@@ -17,6 +18,13 @@ function cancelVote(vote) {
   return {
     type: CANCEL_VOTE,
     ...vote
+  }
+}
+
+function addQuestion(newQuestion) {
+  return {
+    type: ADD_QUESTION,
+    newQuestion
   }
 }
 
@@ -41,5 +49,14 @@ export function handleSaveAnswer(vote) {
     }).catch(() => {
       dispatch(cancelVote(vote));
     })
+  }
+}
+
+export function handleAddQuestion(content) {
+  return (dispatch) => {
+    return saveQuestion(content)
+      .then((newQuestion) => {
+        dispatch(addQuestion(newQuestion))
+      })
   }
 }

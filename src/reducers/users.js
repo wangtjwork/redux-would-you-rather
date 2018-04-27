@@ -1,5 +1,5 @@
 import { RECEIVE_USERS } from '../actions/users';
-import { MAKE_VOTE, CANCEL_VOTE } from '../actions/shared';
+import { MAKE_VOTE, CANCEL_VOTE, ADD_QUESTION } from '../actions/shared';
 
 export default function users (state = {}, action) {
   switch(action.type) {
@@ -28,6 +28,16 @@ export default function users (state = {}, action) {
         [userID]: {
           ...state[userID],
           answers: state[userID].answers.filter((answer) => answer.id !== questionID)
+        }
+      }
+    }
+    case ADD_QUESTION: {
+      const { author, id } = action.newQuestion;
+      return {
+        ...state,
+        [author]: {
+          ...state[author],
+          questions: state[author].questions.concat([id])
         }
       }
     }
