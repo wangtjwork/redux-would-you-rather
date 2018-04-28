@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   render() {
-    const { loggedIn } = this.props;
+    const { loggedIn, curUser } = this.props;
     return (
       <Router>
         <div className="container">
@@ -23,7 +23,7 @@ class App extends Component {
             ? <Login />
             : (
               <div>
-                <Nav />
+                <Nav userName={curUser.name}/>
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/add" component={AddQuestion} />
                 <Route path="/question/:questionID" component={Question} />
@@ -37,8 +37,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => ({
+const mapStateToProps = ({ authedUser, users }) => ({
   loggedIn: authedUser !== null,
+  curUser: users[authedUser]
 })
 
 export default connect(mapStateToProps)(App);

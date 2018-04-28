@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { setAuthedUser } from '../actions/authedUser';
-import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
 class Nav extends Component {
@@ -12,7 +11,7 @@ class Nav extends Component {
     return (
       <nav className="nav">
         <ul>
-          <li>{this.props.curUser.name}</li>
+          <li>{this.props.userName}</li>
           <li>
             <NavLink to="/" exact activeClassName="active">
               Home
@@ -39,8 +38,4 @@ class Nav extends Component {
   }
 }
 
-const mapStateToProps = ({ users, authedUser }) => ({
-  curUser: users[authedUser]
-})
-
-export default connect(mapStateToProps)(Nav);
+export default Nav;
