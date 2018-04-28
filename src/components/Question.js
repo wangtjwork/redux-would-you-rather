@@ -7,9 +7,9 @@ import User from './User'
 
 class Question extends Component {
   handleVote = (option) => {
-    const { curUser, question, dispatch } = this.props;
+    const { users, question, dispatch, authedUser } = this.props;
     const vote = {
-      userID: curUser.id,
+      userID: users[authedUser].id,
       questionID: question.id,
       option
     };
