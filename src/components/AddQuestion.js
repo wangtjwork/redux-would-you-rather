@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleAddQuestion } from '../actions/shared'
+import { handleAddQuestion } from '../actions/shared';
+import { Redirect } from 'react-router-dom';
 
 class AddQuestion extends Component {
   state = {
     optionOneText: '',
-    optionTwoText: ''
+    optionTwoText: '',
+    toHome: false
   }
 
   handleChangeText = (text, option) => {
@@ -24,12 +26,17 @@ class AddQuestion extends Component {
       optionTwoText,
       author: authedUser
     }));
-
-    {/* TODO: Redirect to Dashboard*/}
+    this.setState({
+      toHome: true,
+    });
   }
 
   render() {
-    const {optionOneText, optionTwoText } = this.state;
+    const {optionOneText, optionTwoText, toHome } = this.state;
+
+    if (toHome === true) {
+      return <Redirect to='/'/>
+    }
 
     return (
       <div>
