@@ -31,9 +31,9 @@ class Question extends Component {
       <div>
         <h3>Author:</h3>
         <User user={author} />
-        <h3>Would you rather...</h3>
+        <h3>Would You Rather...</h3>
         <div>
-          <span>
+          <span className={hasAnswered && curUser.answers[question.id] == 'optionOne' ? 'chosen-option' : ''}>
             {hasAnswered === false
               ? <button onClick={() => this.handleVote('optionOne')}>{question.optionOne.text}</button>
               : question.optionOne.text
@@ -44,7 +44,7 @@ class Question extends Component {
             )}
           </span>
           <span> Or </span>
-          <span>
+          <span  className={hasAnswered && curUser.answers[question.id] == 'optionTwo' ? 'chosen-option' : ''}>
             {hasAnswered === false
               ? <button onClick={() => this.handleVote('optionTwo')}>{question.optionTwo.text}</button>
               : question.optionTwo.text
