@@ -18,6 +18,9 @@ class LeaderBoard extends Component {
           <thead>
             <tr>
               <th>
+                Rank
+              </th>
+              <th>
                 User
               </th>
               <th>
@@ -29,9 +32,15 @@ class LeaderBoard extends Component {
             </tr>
           </thead>
           <tbody>
-            {sortedUsers.map((user) => (
+            {sortedUsers.map((user, index) => (
               <tr key={user.id}>
+                <td>{index + 1}</td>
                 <td>{user.name}</td>
+                <td>
+                  <img src={user.avatarURL}
+                    alt={`Avatar of ${user.name}`}
+                    className='avatar'
+                  /></td>
                 <td>{user.questions.length}</td>
                 <td>{Object.keys(user.answers).length}</td>
               </tr>
