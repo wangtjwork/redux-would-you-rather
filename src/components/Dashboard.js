@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QuestionList from './QuestionList';
+import User from './User';
 
 class Dashboard extends Component {
   state = {
@@ -26,8 +27,7 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <h3>{curUser.name}</h3>
-        <img src={curUser.avatarURL} alt="User Avatar"/>
+        <User user={curUser}/>
         <select onChange={this.handleChange} value={this.state.showAnswered}>
           <option value="true">Answered</option>
           <option value="false">Not Answered</option>
