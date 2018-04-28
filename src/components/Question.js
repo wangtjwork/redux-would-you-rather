@@ -18,6 +18,11 @@ class Question extends Component {
 
   render() {
     const { users, question, authedUser } = this.props;
+    if (question === undefined) {
+      return (
+        <div>404 Not found!</div>
+      )
+    }
     const curUser = users[authedUser];
     const author = users[question.author]
     const hasAnswered = curUser.answers.hasOwnProperty(question.id);
@@ -32,29 +37,35 @@ class Question extends Component {
         <h3>Author:</h3>
         <User user={author} />
         <h3>Would You Rather...</h3>
-        <div>
-          <span className={hasAnswered && curUser.answers[question.id] == 'optionOne' ? 'chosen-option' : ''}>
-            {hasAnswered === false
-              ? <button onClick={() => this.handleVote('optionOne')}>{question.optionOne.text}</button>
-              : question.optionOne.text
-            }
-            {hasAnswered && (totalVotes === 0
-              ? 'No Votes Yet'
-              : optionOnePercentage + '%'
-            )}
-          </span>
-          <span> Or </span>
-          <span  className={hasAnswered && curUser.answers[question.id] == 'optionTwo' ? 'chosen-option' : ''}>
-            {hasAnswered === false
-              ? <button onClick={() => this.handleVote('optionTwo')}>{question.optionTwo.text}</button>
-              : question.optionTwo.text
-            }
-            {hasAnswered && (totalVotes === 0
-              ? 'No Votes Yet'
-              : optionTwoPercentage + '%'
-            )}
-          </span>
-        </div>
+        {
+          hasAnswered === false
+          ? (
+            <div>
+              <span>
+                <button onClick={() => this.handleVote('optionOne')}>{question.optionOne.text}</button>
+              </span>
+              <span> OR </span>
+              <span>
+                <button onClick={() => this.handleVote('optionTwo')}>{question.optionTwo.text}</button>
+              </span>
+          </div>
+          )
+          : (
+            <div>
+              <div className={curUser.answers[question.id] === 'optionOne' ? 'chosen-option' : ''}>
+                <p>Option One: {question.optionOne.text}</p>
+                <p>Voted: {question.optionOne.votes.length}</p>
+                <p>Percentage: {optionOnePercentage}%</p>
+              </div>
+              <hr />
+              <div className={curUser.answers[question.id] === 'optionTwo' ? 'chosen-option' : ''}>
+                <p>Option Two: {question.optionTwo.text}</p>
+                <p>Voted: {question.optionTwo.votes.length}</p>
+                <p>Percentage: {optionTwoPercentage}%</p>
+              </div>
+            </div>
+          )
+        }
       </div>
     )
   }
