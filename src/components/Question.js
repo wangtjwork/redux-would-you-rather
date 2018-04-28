@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleSaveAnswer } from '../actions/shared';
 import { Link, withRouter } from 'react-router-dom';
+import User from './User'
 
 
 class Question extends Component {
@@ -16,7 +17,9 @@ class Question extends Component {
   }
 
   render() {
-    const { curUser, question } = this.props;
+    const { users, question, authedUser } = this.props;
+    const curUser = users[authedUser];
+    const author = users[question.author]
     const hasAnswered = curUser.answers.hasOwnProperty(question.id);
     const totalVotes = question.optionOne.votes.length
       + question.optionTwo.votes.length;
@@ -26,7 +29,8 @@ class Question extends Component {
 
     return (
       <div>
-        <h2>{curUser.name}</h2>
+        <h3>Author:</h3>
+        <User user={author} />
         <h3>Would you rather...</h3>
         <div>
           <span>
@@ -64,8 +68,9 @@ const percentCalculation = (num, total) => {
 const mapStateToProps = ({ users, questions, authedUser }, ownProps) => {
   const { questionID } = ownProps.match.params;
   return {
-    curUser: users[authedUser],
+    users,
     question: questions[questionID],
+    authedUser
   }
 }
 
