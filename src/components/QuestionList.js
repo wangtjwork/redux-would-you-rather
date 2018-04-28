@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function QuestionList(props) {
   return (
@@ -7,10 +8,13 @@ export default function QuestionList(props) {
       <ul>
         {
           props.questions.map((question) => (
-            <li key={question.id}>
-              <span>{question.optionOne.text}</span>
-              <button>More...</button>
-            </li>
+            <Link to={"/question/" + question.id} key={question.id}>
+              <li>
+                <span>{question.optionOne.text}</span>
+                &nbsp;OR&nbsp;
+                <span>{question.optionTwo.text}</span>
+              </li>
+            </Link>
           ))
         }
       </ul>
