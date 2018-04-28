@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleSaveAnswer } from '../actions/shared';
-import { Link, withRouter } from 'react-router-dom';
 import User from './User'
 
 

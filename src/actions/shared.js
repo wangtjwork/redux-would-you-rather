@@ -1,7 +1,6 @@
 import { getInitialData, saveQuestionAnswer, saveQuestion } from '../utils/API';
 import { receiveUsers } from './users';
 import { receiveQuestions } from './questions';
-import { setAuthedUser } from './authedUser';
 
 export const MAKE_VOTE = 'MAKE_VOTE';
 export const CANCEL_VOTE = 'CANCEL_VOTE';
