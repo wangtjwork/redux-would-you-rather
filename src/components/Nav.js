@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
+import { setAuthedUser } from '../actions/authedUser';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 class Nav extends Component {
+  handleLogOut = () => {
+    this.props.dispatch(setAuthedUser(null));
+  }
+
   render() {
     return (
       <nav className="nav">
         <ul>
-          <li>Would you rather</li>
+          <li>{this.props.curUser.name}</li>
           <li>
             <NavLink to="/" exact activeClassName="active">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/new" activeClassName="active">
+            <NavLink to="/new" exact activeClassName="active">
               New
             </NavLink>
           </li>
           <li>
-            <NavLink to="/leaderboard" activeClassName="active">
+            <NavLink to="/leaderboard" exact activeClassName="active">
               Leader Board
             </NavLink>
+          </li>
+          <li>
+            <Link to="/" onClick={this.handleLogOut}>
+              Log Out
+            </Link>
           </li>
         </ul>
       </nav>

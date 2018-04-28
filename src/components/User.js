@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function User(props) {
   return (
-    <div class="tweet">
+    <div className="tweet">
       <img src={props.user.avatarURL}
         alt={`Avatar of ${props.user.name}`}
         className="avatar"

@@ -19,8 +19,6 @@ class Login extends Component {
     const { dispatch } = this.props;
 
     dispatch(setAuthedUser(this.state.selectedUser));
-
-    {/* TODO: Redirect to HomePage*/}
   }
 
   render() {
