@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleSaveAnswer } from '../actions/shared';
+import { Link, withRouter } from 'react-router-dom';
 
 
 class Question extends Component {
@@ -60,11 +61,11 @@ const percentCalculation = (num, total) => {
   return percentage;
 }
 
-const mapStateToProps = ({ users, questions, authedUser }) => {
-  {/* TODO: Get ID from Router*/}
+const mapStateToProps = ({ users, questions, authedUser }, ownProps) => {
+  const { questionID } = ownProps.match.params;
   return {
     curUser: users[authedUser],
-    question: questions["8xf0y6ziyjabvozdd253nd"],
+    question: questions[questionID],
   }
 }
 
