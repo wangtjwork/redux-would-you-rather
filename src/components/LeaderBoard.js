@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-class LeaderBoard extends Component {
-  sumQuestionAndAnswer = (user) => {
+const LeaderBoard = ({ users }) => {
+  const sumQuestionAndAnswer = (user) => {
     return user.questions.length + Object.keys(user.answers).length;
   }
 
-  render() {
-    console.log(this.props);
-    const { users } = this.props;
-    const sortedUsers = Object.keys(users).map(id => users[id])
-      .sort((a, b) => this.sumQuestionAndAnswer(b) - this.sumQuestionAndAnswer(a));
+  const sortedUsers = Object.keys(users).map(id => users[id])
+    .sort((a, b) => sumQuestionAndAnswer(b) - sumQuestionAndAnswer(a));
 
     return (
       <div>
@@ -22,6 +19,9 @@ class LeaderBoard extends Component {
               </th>
               <th>
                 User
+              </th>
+              <th>
+                Avatar
               </th>
               <th>
                 # of Questions
@@ -49,7 +49,6 @@ class LeaderBoard extends Component {
         </table>
       </div>
     )
-  }
 }
 
 const mapStateToProps = ({ users }) => {
