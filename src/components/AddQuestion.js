@@ -19,16 +19,21 @@ class AddQuestion extends Component {
 
   handleSubmit = () => {
     const { optionOneText, optionTwoText } = this.state;
-    const { authedUser, dispatch } = this.props;
+    const { authedUser, onSubmit } = this.props;
 
-    dispatch(handleAddQuestion({
+    onSubmit({
       optionOneText,
       optionTwoText,
       author: authedUser
-    }));
-    this.setState({
-      toHome: true,
-    });
+    })
+    .then(() => {
+      this.setState({
+        toHome: true
+      })
+    })
+    .catch(() => {
+      alert('Add Question failed, wait some time before resume.');
+    })
   }
 
   render() {
@@ -60,6 +65,14 @@ class AddQuestion extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (newQuestion) => {
+      return dispatch(handleAddQuestion(newQuestion));
+    }
+  }
+}
+
 const mapStateToProps = ({ authedUser }) => ({ authedUser })
 
-export default connect(mapStateToProps)(AddQuestion);
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuestion);
