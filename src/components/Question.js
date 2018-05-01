@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleSaveAnswer } from '../actions/shared';
-import User from './User'
-
+import User from './User';
+import Login from './Login';
 
 class Question extends Component {
   handleVote = (option) => {
@@ -21,6 +21,9 @@ class Question extends Component {
       return (
         <div>404 Not found!</div>
       )
+    }
+    if (authedUser === null) {
+      return <Login />
     }
     const curUser = users[authedUser];
     const author = users[question.author]

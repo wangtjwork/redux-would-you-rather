@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import Login from './Login';
@@ -19,18 +19,13 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          {loggedIn === false
-            ? <Login />
-            : (
-              <div>
-                <Nav userName={curUser.name}/>
-                <Route path="/" exact component={Dashboard} />
-                <Route path="/add" component={AddQuestion} />
-                <Route path="/question/:questionID" component={Question} />
-                <Route path="/leaderboard" component={LeaderBoard} />
-              </div>
-            )
-          }
+          <Nav userName={curUser ? curUser.name : ""}/>
+          <Switch>
+            <Route path="/question/:questionID" component={Question} />
+            <Route path="/" exact render={() => loggedIn ? <Dashboard /> : <Login />} />
+            <Route path="/add" render={() => (loggedIn ? <AddQuestion />: <Login />)} />
+            <Route path="/leaderboard" render={() => loggedIn ? <LeaderBoard /> : <Login/> } />
+          </Switch>
         </div>
       </Router>
     );
