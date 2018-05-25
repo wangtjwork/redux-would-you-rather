@@ -15,3 +15,7 @@ Clone the project, run `npm install` and then `npm start`.
 ## Contribution
 
 The style is a mess. Feel free to add any styles!
+
+## License
+
+Released under [MIT License](https://opensource.org/licenses/MIT)
